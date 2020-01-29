@@ -1,0 +1,28 @@
+<h1>IT Index's page</h1>
+
+
+<div class="grid-container">
+    <ul>
+        <% @users.each do |user| %>
+            <p><b>Name: </b><%= user["name"] %><b> Email: </b><%= user["email"] %><b> Role: </b><%= user["role"] %> </p>
+        <% end %>
+    </ul>
+</div>
+
+<div class="grid-container">
+    <ul>
+        <% @clients.each do |client| %>
+            <p><b>Company: </b><%= client["name"] %><b> Address: </b><%= client["address"] %></p>
+        <% end %>
+    </ul>
+</div>
+
+<div class="grid-container">
+    <ul>
+        <% @reports.each do |reports| %>
+            <p><b>Date: </b><%= reports["date"] %><b> User Id: </b><%= reports["user_id"] %><b> Client Id: </b><%= reports["client_id"] %><b> Report: </b><%= reports["report"] %></p>
+        <% end %>
+    </ul>
+</div>
+
+
