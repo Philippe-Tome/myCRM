@@ -76,6 +76,11 @@ get '/Engineer/new/records' do
   erb :"/Engineer/new"
 end
 
+get '/new/records' do
+  redirect '/' unless logged_in?
+  erb :"/new_records"
+end
+
 post '/Engineer/new/records' do
   create_eng_report(params[:date], current_user['id'], params[:client_id], params[:report])
   
@@ -83,11 +88,46 @@ post '/Engineer/new/records' do
 end
 
 post '/new/records' do
-  create_report(params[:date], params[:id], params[:client_id], params[:report])
+  create_report(params[:date], params[:user_id], params[:client_id], params[:report])
+
+  redirect '/IT/index'
 end
 
 delete '/session' do 
   session[:user_id] = nil
   redirect '/'
 end
+
+delete '/records' do
+  delete_report(params[:report_id])
+  user = current_user()
+  if user["role"] == "IT"
+    redirect '/IT/index'
+  elsif user["role"] == "Manager"
+    redirect '/Manager/index'
+  else 
+    redirect '/Engineer/index'
+  end
+end
+
+get '/records/:id/edit' do
+  @user = current_user()
+  @clients = get_clients()
+  @result = get_report(params[:id])[0]
+  erb :edit_records
+end
+
+patch '/records/edit:id' do
+  update_report(params[:date], params[:user_id].to_i, params[:client_id].to_i, params[:report], params[:id])
+  @user = current_user()
+  if @user["role"] == "IT"
+    redirect '/IT/index'
+  elsif @user["role"] == "Manager"
+    redirect '/Manager/index'
+  else 
+    redirect '/Engineer/index'
+  end
+end
+
+
 

@@ -1,0 +1,36 @@
+<h1>This is the edit record page</h1>
+
+<%= @result %> 
+<%= @clients[0] %>
+<%= @clients[1] %>
+
+<form action="/records/edit<%= @result['id'] %>" method="post">
+        <input type="hidden" name="_method" value="patch">
+        <% if (@user["role"] == "IT") || (@user["role"] == "Manager") %>
+            <label for="">Company: </label>
+            <select>
+                <% @clients.each do |client| %>
+                    <option name="client_id" value="<%= client['id'] %>"><%= client['company_name']%></option>
+                <% end %>
+            </select>
+            <label for="">Author: </label>
+            <input type="text" name="user_id" value="<%= @result['user_id'] %>">
+            <label for="">Date: </label>
+            <input type="text" name="date" value="<%= @result['date'] %>">
+            <label for="">Report: </label>
+            <input type="text" name="report" value="<%= @result['report'] %>">
+        <% else %>
+            <label for="">Company name: </label>
+            <input type="hidden" name="client_id" value="<%= @result['client_id'] %>">
+            <input type="hidden" name="user_id" value="<%= @result['user_id'] %>">
+            <label for="">Date: </label>
+            <input type="text" name="date" value="<%= @result['date'] %>">
+            <label for="">Report: </label>
+            <input type="text" name="report" value="<%= @result['report'] %>">
+        <% end %>
+        <button>update</button>
+</form>
+
+
+
+

@@ -7,5 +7,4 @@ def run_sql(sql, args = [])
     results
   end
 
-  # PG.connect(ENV['DATABASE_URL'] || {dbname: 'GoodFoodHunting', "DB password"})
 

@@ -4,11 +4,20 @@
 <a href="/Engineer/new/records">Create a new report</a><br>
 
 
-
 <div class="grid-container">
     <ul>
         <% @reports.each do |reports| %>
-            <p><b>Date: </b><%= reports["date"] %><b> Author: </b><%= reports["name"] %><b> Company: </b><%= reports["company_name"] %><b> Report: </b><%= reports["report"] %></p>
+            <li>
+                <p><b>Date: </b><%= reports["date"] %><b> Author: </b><%= reports["name"] %><b> Company: </b><%= reports["company_name"] %><b> Report: </b><%= reports["report"] %><b> Report autor: </b><%= reports["user_id"] %></p>
+                <% if current_user['id'] == reports["user_id"] %>
+                    <form action="/records" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="report_id" value=<%= reports["id"] %>>
+                        <button>delete</button>
+                    </form>
+                    <a href="/records/<%= reports['id'] %>/edit">edit</a>
+                <% end %>
+            </li>    
         <% end %>
     </ul>
 </div>

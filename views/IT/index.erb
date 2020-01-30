@@ -4,7 +4,9 @@
 <div class="grid-container">
     <ul>
         <% @users.each do |user| %>
-            <p><b>Name: </b><%= user["name"] %><b> Email: </b><%= user["email"] %><b> Role: </b><%= user["role"] %> </p>
+            <li>
+                <p><b>Name: </b><%= user["name"] %><b> Email: </b><%= user["email"] %><b> Role: </b><%= user["role"] %> </p>
+            </li>
         <% end %>
     </ul>
 </div>
@@ -12,7 +14,9 @@
 <div class="grid-container">
     <ul>
         <% @clients.each do |client| %>
-            <p><b>Company: </b><%= client["name"] %><b> Address: </b><%= client["address"] %></p>
+            <li>
+                <p><b>Company: </b><%= client["name"] %><b> Address: </b><%= client["address"] %></p>
+            </li>
         <% end %>
     </ul>
 </div>
@@ -22,7 +26,15 @@
 <div class="grid-container">
     <ul>
         <% @reports.each do |reports| %>
-            <p><b>Date: </b><%= reports["date"] %><b> User Id: </b><%= reports["user_id"] %><b> Client Id: </b><%= reports["client_id"] %><b> Report: </b><%= reports["report"] %></p>
+            <li>
+                <p><b>Date: </b><%= reports["date"] %><b> Author: </b><%= reports["name"] %><b> Company: </b><%= reports["company_name"] %><b> Report: </b><%= reports["report"] %></p>
+                <form action="/records" method="post">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="report_id" value=<%= reports["id"] %>>
+                    <button>delete</button>
+                </form>
+                <a href="/records/<%= reports['id'] %>/edit">edit</a>
+            </li>
         <% end %>
     </ul>
 </div>

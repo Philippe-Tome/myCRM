@@ -13,7 +13,6 @@ def get_user_name(user_id)
   run_sql(sql, [user_id])
 end
   
-  # create
 require 'bcrypt'
 def create_user(name, email, password, role)
   password_digest = BCrypt::Password.create(password)
