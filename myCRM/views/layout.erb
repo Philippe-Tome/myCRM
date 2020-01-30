@@ -12,6 +12,11 @@
   <% if logged_in? %>
     <p> Logged in as: <%= current_user['name']%></p>
     <p> User ID: <%= current_user['id']%></p>
+
+    <form action="/session" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button>Logout</button>
+    </form>
   <% end %>
 
 

@@ -12,7 +12,7 @@ def get_reports
     run_sql(sql)
 end
 
-def create_report(date, user_id, client_id, report)
+def create_eng_report(date, user_id, client_id, report)
     sql = <<~SQL
       INSERT INTO service_reports 
       (date, user_id, client_id, report)
@@ -22,3 +22,12 @@ def create_report(date, user_id, client_id, report)
     run_sql(sql, [date, user_id, client_id, report])
 end
 
+def create_report(date, user_id, client_id, report)
+  sql = <<~SQL
+    INSERT INTO service_reports 
+    (date, user_id, client_id, report)
+    VALUES
+    ($1, $2, $3, $4);
+    SQL
+  run_sql(sql, [date, user_id, client_id, report])
+end

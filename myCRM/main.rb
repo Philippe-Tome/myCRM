@@ -1,17 +1,21 @@
 # models for each db tables
 
 require 'sinatra'
-require 'sinatra/reloader'
-require 'pry'
 require_relative 'db/shared'
 require_relative 'models/users.rb'
 require_relative 'models/clients.rb'
 require_relative 'models/service_reports.rb'
 require_relative 'controllers/clients_controller'
 
+if development?
+require 'sinatra/reloader'
+require 'pry'
+also_reload 'db/shared'
+end
+
+
 enable :sessions 
 
-also_reload 'db/shared'
 
 def logged_in?
   if session[:user_id]
@@ -67,16 +71,23 @@ get '/Engineer/index' do
   erb :"/Engineer/index"
 end
 
-get '/Engineer/new' do
+get '/Engineer/new/records' do
   redirect '/' unless logged_in?
   erb :"/Engineer/new"
 end
 
-post '/records' do
-  create_report(params[:date], params[:user_id], params[:client_id], params[:report])
+post '/Engineer/new/records' do
+  create_eng_report(params[:date], current_user['id'], params[:client_id], params[:report])
   
   redirect '/Engineer/index'
 end
 
+post '/new/records' do
+  create_report(params[:date], params[:id], params[:client_id], params[:report])
+end
 
+delete '/session' do 
+  session[:user_id] = nil
+  redirect '/'
+end
 
