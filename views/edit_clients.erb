@@ -1,0 +1,13 @@
+<h2>This is the Client edit page</h2>
+
+
+<form action="/clients/edit<%= @client['id'] %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="">Company name: </label>
+    <input type="text" name="company_name" value="<%= @client['company_name'] %>">
+    <label for="">Address: </label>
+    <input type="text" name="address" value="<%= @client['address'] %>">
+    <button>Edit</button>
+</form>
+
+

@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(194, 206, 214);
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
+.grid-container {
+    border: solid black 1px;
+}
+
+li {
+    display: flex;
+    align-items: center;
+}
+
+form {
+    text-align: center;
+}
+
+.profile {
+    text-align: right;
+}
+
+.nav {
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    border: solid black 1px;
+}

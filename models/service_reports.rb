@@ -52,14 +52,6 @@ def create_report(date, user_id, client_id, report)
   run_sql(sql, [date, user_id, client_id, report])
 end
 
-def delete_report(id)
-  sql = <<~SQL
-    DELETE FROM service_reports 
-    WHERE id = $1;
-    SQL
-  run_sql(sql, [id])
-end
-
 def update_report(date, user_id, client_id, report, id)
   sql = <<~SQL
   UPDATE service_reports 
@@ -71,6 +63,15 @@ def update_report(date, user_id, client_id, report, id)
   WHERE id = $5;
   SQL
   run_sql(sql, [date, user_id, client_id, report, id])
-end  
+end 
+ 
+def delete_report(id)
+  sql = <<~SQL
+    DELETE FROM service_reports 
+    WHERE id = $1;
+    SQL
+  run_sql(sql, [id])
+end
+
 
 

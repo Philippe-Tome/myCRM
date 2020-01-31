@@ -1,21 +1,41 @@
-<h1>IT Index's page</h1>
+<h2>IT Index's page</h2>
 
 
+
+<a href="/new/user">Add a new user</a><br>
 <div class="grid-container">
     <ul>
         <% @users.each do |user| %>
             <li>
-                <p><b>Name: </b><%= user["name"] %><b> Email: </b><%= user["email"] %><b> Role: </b><%= user["role"] %> </p>
+                <p>
+                    <b>Name: </b><%= user["name"] %><b> Email: </b><%= user["email"] %><b> Role: </b><%= user["role"] %>
+                    <form action="/users" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="user_id" value=<%= user["id"] %>>
+                        <button>delete</button>
+                    </form>
+                    <a href="/users/<%= user['id'] %>/edit">Edit</a>
+                </p>
             </li>
         <% end %>
     </ul>
 </div>
 
+
+<a href="/new/clients">Add a new client</a><br>
 <div class="grid-container">
     <ul>
         <% @clients.each do |client| %>
             <li>
-                <p><b>Company: </b><%= client["name"] %><b> Address: </b><%= client["address"] %></p>
+                <p>
+                    <b>Company: </b><%= client["company_name"] %><b> Address: </b><%= client["address"] %>
+                    <form action="/clients" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="client_id" value=<%= client["id"] %>>
+                        <button>delete</button>
+                    </form>
+                    <a href="/clients/<%= client['id'] %>/edit">Edit</a>
+                </p>
             </li>
         <% end %>
     </ul>
@@ -33,7 +53,7 @@
                     <input type="hidden" name="report_id" value=<%= reports["id"] %>>
                     <button>delete</button>
                 </form>
-                <a href="/records/<%= reports['id'] %>/edit">edit</a>
+                <a href="/records/<%= reports['id'] %>/edit">Edit</a>
             </li>
         <% end %>
     </ul>

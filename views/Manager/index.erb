@@ -1,10 +1,21 @@
-<h1>Manager Index's page</h1>
+<h2>Manager Index's page</h2>
 
+
+
+<a href="/new/clients">Add a new client</a><br>
 <div class="grid-container">
     <ul>
         <% @clients.each do |client| %>
             <li>
-                <p><b>Company: </b><%= client["name"] %><b> Address: </b><%= client["address"] %></p>
+                <p>
+                    <b>Company: </b><%= client["company_name"] %><b> Address: </b><%= client["address"] %>
+                    <form action="/clients" method="post">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="client_id" value=<%= client["id"] %>>
+                        <button>delete</button>
+                    </form>
+                    <a href="/clients/<%= client['id'] %>/edit">Edit</a>
+                </p>
             </li>
         <% end %>
     </ul>

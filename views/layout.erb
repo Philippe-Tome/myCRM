@@ -9,16 +9,23 @@
 </head>
 <body>
 
+<h1>myCRM</h1>
+
   <% if logged_in? %>
-    <p> Logged in as: <%= current_user['name']%></p>
-    <p> User ID: <%= current_user['id'] %></p>
+    <div class="profile">
+      <p> Logged in as: <%= current_user['name']%></p>
+      <p> User ID: <%= current_user['id'] %></p>
+    </div>
+    <div class="nav">
+      <a href="/users/<%= current_user['id'] %>/edit">Edit Profile</a>
+      <a href="/<%= current_user['role'] %>/index">Home</a>
+    </div>
 
     <form action="/session" method="post">
       <input type="hidden" name="_method" value="delete">
       <button>Logout</button>
     </form>
   <% end %>
-
 
   <%= yield %>
 

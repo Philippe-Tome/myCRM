@@ -1,14 +1,14 @@
-<h1>Engineer Index's page</h1>
+<h2>Engineer Index's page</h2>
 
 
-<a href="/Engineer/new/records">Create a new report</a><br>
+<a href="/new/records">Create a new report</a><br>
 
 
 <div class="grid-container">
     <ul>
         <% @reports.each do |reports| %>
             <li>
-                <p><b>Date: </b><%= reports["date"] %><b> Author: </b><%= reports["name"] %><b> Company: </b><%= reports["company_name"] %><b> Report: </b><%= reports["report"] %><b> Report autor: </b><%= reports["user_id"] %></p>
+                <p><b>Date: </b><%= reports["date"] %><b> Author: </b><%= reports["name"] %><b> Company: </b><%= reports["company_name"] %><b> Report: </b><%= reports["report"] %></p>
                 <% if current_user['id'] == reports["user_id"] %>
                     <form action="/records" method="post">
                         <input type="hidden" name="_method" value="delete">

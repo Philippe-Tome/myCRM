@@ -1,0 +1,26 @@
+<h2>This is the User edit page</h2>
+
+
+<form action="/users/edit<%= @user['id'] %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <label for="">Name: </label>
+    <input type="text" name="name" value="<%= @user['name'] %>">
+    <label for="">Email: </label>
+    <input type="text" name="email" value="<%= @user['email'] %>">
+    <label for="">Password: </label>
+    <input type="password" name="password_digest">
+    <% if (@current_user["role"] == "IT") || (@current_user["role"] == "Manager")%>
+        <label for="">Role: </label>
+        <select name="role">
+            <% @users.each do |user| %>
+                <option value="<%= user['role'] %>"><%= user['role']%></option>
+            <% end %>
+        </select>
+    <% else %>
+        <label for="">Role: <%= @user['role'] %></label>
+        <input type="hidden" name="role" value="<%= @user['role'] %>">
+    <% end %>
+    <button>Edit</button>
+</form>
+
+        
